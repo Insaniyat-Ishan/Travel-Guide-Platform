@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences</title>
+</head>
+<body>
+    <h1>Preferences</h1>
+    {% if user_favorites %}
+        <ul>
+            <li>Preferred Destination: {{ user_favorites.favorite_destination }}</li>
+            <li>Preferred Vehicle: {{ user_favorites.favorite_vehicle }}</li>
+            <li>Preferred Hotel: {{ user_favorites.favorite_hotel }}</li>
+            <li>Preferred Airline: {{ user_favorites.favorite_airline }}</li>
+        </ul>
+    {% else %}
+        <p>No Preferences found.</p>
+    {% endif %}
+</body>
+</html>

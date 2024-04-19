@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Hotels</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            /* Set background image */
+            background-image: url("/static/images/backgrounds/hotel.jpg"); /* Assuming the image is located in your static directory */
+            /* Set background size to cover entire viewport */
+            background-size: cover;
+            /* Set background attachment to fixed to keep the image fixed in the viewport */
+            background-attachment: fixed;
+            /* Set background position to center */
+            background-position: center;
+            /* Set background repeat to no-repeat */
+            background-repeat: no-repeat;
+            /* Set font color to black */
+            color: black;
+            /* Add padding for better spacing */
+            padding: 20px;
+        }
+        h1 {
+            /* Margin bottom for heading */
+            margin-bottom: 20px;
+        }
+        .hotel-list {
+            /* Remove bullet points from list */
+            list-style-type: none;
+            /* Remove default padding */
+            padding: 0;
+        }
+        .hotel-item {
+            /* Add margin between hotel items */
+            margin-bottom: 10px;
+            /* Set background color for each hotel item */
+            background-color: rgb(255, 255, 255); /* Semi-transparent background color for better readability */
+            /* Add padding to each hotel item */
+            padding: 10px;
+            /* Add border radius for rounded corners */
+            border-radius: 5px;
+            /* Add shadow for depth */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .button-container {
+            /* Flex container */
+            display: flex;
+            /* Set flex direction to column */
+            flex-direction: column;
+            /* Align items in center */
+            align-items: center;
+            /* Add margin top */
+            margin-top: 20px;
+        }
+        .add-favorite-button {
+            /* Add margin below Add Favorite Hotel button */
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Favorite Hotels</h1>
+        <ul class="hotel-list">
+            {% for favorite_hotel in favorite_hotels %}
+                <li class="hotel-item">{{ favorite_hotel.hotel.name }} - {{ favorite_hotel.hotel.location }}</li>
+            {% empty %}
+                <li>No favorite hotels yet.</li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <a href="{% url 'add_favorite_hotel' %}" class="btn btn-primary add-favorite-button">Add Favorite Hotel</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary go-home-button">Go to Home</a>
+        </div>
+    </div>
+</body>
+</html>

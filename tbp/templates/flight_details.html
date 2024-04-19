@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Details</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Flight Details</h1>
+        <p>Airline: {{ flight.airline.name }}</p>
+        <p>Plane: {{ flight.name }}</p>
+        <p>Model: {{ flight.model }}</p>
+        <p>Arrival Country: {{ flight.arrival_country }}</p>
+        <p>Departure Country: {{ flight.departure_country }}</p>
+        <!-- Add more flight details as needed -->
+    </div>
+
+    <!-- Buttons Section -->
+    <div class="mt-8 text-center">
+        <a href="{% url 'book_flight' %}" class="button bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition duration-300">Book Flight</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Hotel Due Amount</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/static/images/backgrounds/bg-01.jpg'); /* Path to your background image */
+            background-size: cover; /* Cover the entire screen */
+            background-position: center;
+            background-attachment: fixed; /* Fixed background */
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto 20px; /* Added margin-top */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .no-bookings {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Hotel Due Amount</h1>
+        <table>
+            <tr>
+                <th>Hotel Name</th>
+                <th>Room Type</th>
+                <th>Booking Date</th>
+                <th>Checkout Date</th>
+                <th>Due Amount</th>
+            </tr>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.room.hotel.name }}</td>
+                <td>{{ booking.room.type }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.checkout_date }}</td>
+                <td>{{ booking.due_amount }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-bookings">No bookings found</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

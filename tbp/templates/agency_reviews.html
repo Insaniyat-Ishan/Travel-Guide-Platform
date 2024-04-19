@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ agency.name }} Reviews</title>
+    <!-- Add your CSS and scripts if needed -->
+</head>
+<body>
+    <h1>{{ agency.name }} Reviews</h1>
+    <h2>Location: {{ agency.location }}</h2>
+
+    <h3>Reviews:</h3>
+    <ul>
+        {% for review in reviews %}
+            <li>
+                <p>Username: {{ review.user.username }}</p>
+                <p>Rating: {{ review.rating }}</p>
+                <p>Comment: {{ review.comment }}</p>
+            </li>
+        {% empty %}
+            <li>No reviews yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

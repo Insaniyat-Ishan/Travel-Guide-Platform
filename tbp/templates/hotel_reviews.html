@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Reviews</title>
+</head>
+<body>
+    <h1>Reviews for {{ hotel.name }}</h1>
+    <ul>
+        {% for review, username in reviews_with_usernames %}
+            <li>{{ username }}: {{ review.comment }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

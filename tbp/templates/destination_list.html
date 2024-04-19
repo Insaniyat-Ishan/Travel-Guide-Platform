@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'video_background_destination1.html' %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination List</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .destination-item {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .destination-img {
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, filter 0.3s ease; /* added filter transition */
+        }
+        .destination-img:hover {
+            transform: scale(1.05);
+            filter: brightness(0.7); /* darken the image on hover */
+        }
+        .destination-info {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4 mb-4">Destinations</h1>
+        <div class="row">
+            <!-- Assuming 'destinations' variable is coming from your backend -->
+            {% for destination in destinations %}
+            <div class="col-lg-4 col-md-6">
+                <div class="destination-item">
+                    {% if destination.name == 'Mohakhali' %}
+                        <a href="{% url 'destination_detail' destination.id %}">
+                            <img class="destination-img img-fluid" src="{% static 'images/destination_images/mohakhali.jpg' %}" alt="{{ destination.name }}">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'destination_detail' destination.id %}">
+                            <img class="destination-img img-fluid" src="{{ destination.image.url }}" alt="{{ destination.name }}">
+                        </a>
+                    {% endif %}
+                    <div class="destination-info">
+                        <h5>{{ destination.name }}</h5>
+                        <p>{{ destination.country }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

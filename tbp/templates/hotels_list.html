@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels List</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS (assuming Bootstrap is already included in your project) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hotel-item {
+            width: 200px; /* Set the width of each hotel item */
+            display: inline-block;
+            margin-right: 20px; /* Adjust the spacing between hotel items */
+            margin-bottom: 20px; /* Adjust the spacing between rows */
+            text-align: center;
+            color:aliceblue 
+        }
+
+        .hotel-image {
+            width: 200px; /* Set the width to your desired fixed length */
+            height: 150px; /* Set the height to your desired fixed length */
+            overflow: hidden; /* Hide overflowing content */
+            border-radius: 10px; /* Add rounded corners to the container */
+        }
+        .hotel-img:hover {
+            transform: scale(1.05);
+            filter: brightness(0.7); /* darken the image on hover */
+        }
+
+        .hotel-name {
+            margin-top: 10px;
+            font-weight: bold;
+            color:aliceblue
+        }
+    </style>
+</head>
+{% include 'video_background _hotel.html' %}
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6" style="color: white;">Hotels List</h1>
+        <div class="hotel-list">
+            {% for hotel in hotels %}
+                <div class="hotel-item">
+                    <a href="{% url 'hotel_details' hotel_id=hotel.id %}">
+                        <img src="{{ hotel.image.url }}" alt="{{ hotel.name }}" class="hotel-image">
+                    </a>
+                    <div class="hotel-name">{{ hotel.name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Home Button -->
+        <div class="mt-8">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
+        </div>
+        <!-- Buttons -->
+        <div class="mt-4">
+            <a href="{% url 'advanced_search' %}" class="btn btn-primary mr-4">Advanced Search</a>
+            <a href="{% url 'book_room' %}" class="btn btn-primary">Book Room</a>
+        </div>
+    </div>
+</body>
+</html>

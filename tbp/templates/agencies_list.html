@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencies List</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS (assuming Bootstrap is already included in your project) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .agency-item {
+            width: 200px; /* Set the width of each hotel item */
+            display: inline-block;
+            margin-right: 20px; /* Adjust the spacing between hotel items */
+            margin-bottom: 20px; /* Adjust the spacing between rows */
+            text-align: center;
+        }
+
+        .agency-image-container {
+            width: 200px; /* Set the width to your desired fixed length */
+            height: 150px; /* Set the height to your desired fixed length */
+            overflow: hidden; /* Hide overflowing content */
+            border-radius: 10px; /* Add rounded corners to the container */
+        }
+
+        .agency-image {
+            width: 100%; /* Ensure the image fills the container */
+            height: 100%; /* Ensure the image fills the container */
+            object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+        }
+
+        .agency-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+{% include 'video_background_agency.html' %}
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Agencies List</h1>
+        <div class="flex flex-wrap">
+            {% for agency in agencies %}
+                <div class="agency-item">
+                    <a href="{% url 'agency_details' agency_id=agency.id %}">
+                        <div class="agency-image-container">
+                            <img src="{{ agency.image.url }}" alt="{{ agency.name }}" class="agency-image">
+                        </div>
+                    </a>
+                    <p class="agency-name">{{ agency.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Home Button -->
+        <div class="mt-8">
+            <a href="{% url 'home' %}" class="btn btn-secondary">Home</a>
+        </div>
+        <!-- Buttons -->
+        <div class="mt-4">
+            <form action="{% url 'advanced_car_search' %}" method="get" class="inline-block mr-4">
+                <button type="submit" class="btn btn-primary">Advanced Car Search</button>
+            </form>
+            <form action="{% url 'book_vehicle' %}" method="get" class="inline-block">
+                <button type="submit" class="btn btn-primary">Book Vehicle</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

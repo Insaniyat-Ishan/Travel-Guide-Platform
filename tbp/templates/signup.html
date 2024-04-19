@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Sign Up</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url('{% static "login-form-v3/Login_v3/images/bg-01.jpg" %}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Ensure the body takes up the full height of the viewport */
+        }
+
+        .form-wrap {
+            background-color: rgba(3, 3, 3, 0);
+            padding: 80px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8);
+            margin-left: -50px;
+        }
+        .form-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #fcf6f6;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #f5f3f3;
+            font-size: 1rem;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05); /* Transparent */
+            color: #fff; /* Text color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+        }
+        .form-group button {
+            width: auto;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0); /* Fully transparent */
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add transition effect */
+            border: 1px solid #fff;
+            font-size: 1rem;
+            
+        }
+        .form-group button:hover {
+            background-color: rgba(255, 255, 255, 0.05); /* Change color on hover */
+        }
+        .form-group select {
+            background-color: rgba(255, 255, 255, 0.05); /* Transparent */
+            color: #fff; /* Text color */
+        }
+        .form-group option {
+            color: #000; /* Dropdown option text color */
+        }
+        .login-button {
+            background-color: rgba(0, 0, 0, 0); /* Fully transparent */
+            color: #fff;
+            border: 1px solid #fff; /* Add border */
+            transition: background-color 0.3s ease; /* Add transition effect */
+        }
+        .login-button:hover {
+            background-color: rgba(255, 255, 255, 0.05); /* Change color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-wrap">
+        <h2 class="form-title">Sign Up</h2>
+        <form method="post" class="space-y-4">
+            {% csrf_token %}
+            <!-- Username field -->
+            <div class="form-group">
+                <label for="id_username">Username:</label>
+                <input type="text" name="username" id="id_username" required>
+            </div>
+            <!-- Email field -->
+            <div class="form-group">
+                <label for="id_email">Email:</label>
+                <input type="email" name="email" id="id_email" required>
+            </div>
+            <!-- Name field -->
+            <div class="form-group">
+                <label for="id_name">Name:</label>
+                <input type="text" name="name" id="id_name">
+            </div>
+            <!-- Password field -->
+            <div class="form-group">
+                <label for="id_password1">Password:</label>
+                <input type="password" name="password1" id="id_password1" required>
+            </div>
+            <!-- Confirm Password field -->
+            <div class="form-group">
+                <label for="id_password2">Confirm Password:</label>
+                <input type="password" name="password2" id="id_password2" required>
+            </div>
+            <!-- Submit button -->
+            <div class="form-group flex justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Sign Up</button>
+                <a href="{% url 'login' %}" class="login-button text-white font-semibold py-2 px-4 border border-white rounded">Login</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+

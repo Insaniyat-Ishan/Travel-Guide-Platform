@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ agency.name }} - Agency Details</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Bootstrap CSS (assuming Bootstrap is already included in your project) -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .agency-image {
+            max-width: 600px; /* Set the maximum width of the image */
+            height: auto;
+            border-radius: 10px; /* Add rounded corners to the image */
+            margin-bottom: 10px; /* Add space below the image */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6">{{ agency.name }}</h1>
+        <img src="{{ agency.image.url }}" alt="{{ agency.name }}" class="agency-image">
+        <p><strong>Location:</strong> {{ agency.location }}</p>
+        <p><strong>Average Rating:</strong> {{ avg_rating|default:"No reviews yet" }}</p>
+        <h2 class="text-2xl font-bold mb-4">Vehicles</h2>
+        <ul>
+            {% for vehicle in agency.vehicle_set.all %}
+                <li>
+                    <strong>Car Type:</strong> {{ vehicle.car_type }}, 
+                    <strong>License No:</strong> {{ vehicle.license_no }},
+                    <strong>Price:</strong> ${{ vehicle.price }}
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="mt-8">
+            <a href="{% url 'agencies_list' %}" class="btn btn-secondary">Back to Agencies List</a>
+        </div>
+    </div>
+</body>
+</html>

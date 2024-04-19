@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review and Rate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            color: black; /* Set text color to black */
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: black; /* Set text color to black */
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: black; /* Set text color to black */
+        }
+        form {
+            /* background-image: url("{% static 'images/backgrounds/rate.jpg' %}"); */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 70px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, );
+            width: 400px; /* Adjust the width as needed */
+            
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: black; /* Set text color to black */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #thank-you-message {
+            margin-top: 20px;
+            display: none;
+            font-size: 18px;
+            color: #007bff;
+        }
+    </style>
+    
+
+    <!-- Add your scripts if needed -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    {% include 'video_background.html' %}
+    <div class="container">
+        <form id="review-form-data" method="post">
+            <h1>Review and Rate</h1> <!-- Moved the title inside the form -->
+            {% csrf_token %}
+            <!-- Type dropdown field -->
+            <label for="type">Select Type:</label>
+            <select name="type" id="type">
+                <option value="hotel">Hotel</option>
+                <option value="agency">Agency</option>
+            </select>
+            <br>
+            <!-- Name dropdown field -->
+            <label for="name">Select Name:</label>
+            <select name="name" id="name">
+            </select>
+            <br>
+            <!-- Rating field -->
+            <label for="rating">Rating:</label>
+            <select name="rating" id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+            <!-- Comment field -->
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment"></textarea>
+            <br>
+            <button type="button" id="submit-review">Submit</button>
+        </form>
+        <div id="thank-you-message">
+            <p>Thank you for your review!</p>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $('#type').change(function() {
+            var type = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: '/get_names/',
+                data: {'type': type},
+                success: function(response) {
+                    $('#name').empty();
+                    $.each(response.names, function(index, name) {
+                        $('#name').append($('<option>', {
+                            value: name,
+                            text: name
+                        }));
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+
+        $('#submit-review').click(function() {
+            $.ajax({
+                type: 'POST',
+                url: '/review_and_rate/', // URL pointing to your review_and_rate view
+                data: $('#review-form-data').serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        $('#review-form').hide();
+                        $('#thank-you-message').show();
+                    } else {
+                        alert('Failed to submit review. Please try again.');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
+
+

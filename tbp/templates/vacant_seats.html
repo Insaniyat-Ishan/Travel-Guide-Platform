@@ -1,0 +1,24 @@
+<div class="max-w-lg mx-auto bg-white shadow-md rounded-lg px-8 py-6">
+  <h1 class="text-3xl font-semibold mb-6">Vacant Seats</h1>
+
+  {% if vacant_seats %}
+      <p class="mb-4">Total vacant seats: {{ vacant_seats.count }}</p>
+      <ul>
+          {% for seat in vacant_seats %}
+              <li class="bg-gray-100 rounded-lg px-4 py-2 mb-2">{{ seat }}</li>
+          {% endfor %}
+      </ul>
+  {% else %}
+      <p class="text-gray-600 mt-6">No vacant seats found.</p>
+  {% endif %}
+
+  <!-- Include the form for further searches if needed -->
+  <form method="get" action="{% url 'search_vacant_seats' %}" class="mt-6">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded inline-block">Search Again</button>
+  </form>
+
+  <!-- Home button -->
+  <a href="{% url 'home' %}" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded inline-block mt-6">Home</a>
+</div>

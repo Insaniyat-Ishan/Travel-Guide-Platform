@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Flight Details</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom CSS for text colors */
+        .text-white {
+            color: white;
+        }
+
+        .text-vibrant {
+            color: #ff00ff; /* Change this to your desired vibrant color */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    {% include 'video_background_flights.html' %}
+    <div class="container mx-auto">
+        <h2 class="text-3xl font-bold mb-6 text-white">All Flight Details</h2>
+        <ul>
+            {% for flight in all_flights %}
+                <li class="mb-4 border-b pb-4">
+                    <p class="text-xl font-semibold text-white">{{ flight.name }} - {{ flight.model }} ({{ flight.capacity }} seats)</p>
+                    <a href="{% url 'view_flight_details' flight.id %}" class="text-vibrant hover:underline">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'search_vacant_seats' %}" class="button bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded transition duration-300 mt-6">Advanced Search</a>
+    </div>
+</body>
+</html>

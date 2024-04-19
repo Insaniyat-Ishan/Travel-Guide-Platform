@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog-Z Bootstrap 5.0 HTML Template</title>
+    <link rel="stylesheet" href="{% static 'extend_pic/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'extend_pic/fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'extend_pic/css/templatemo-style.css' %}">
+<!--
+    
+TemplateMo 556 Catalog-Z
+
+https://templatemo.com/tm-556-catalog-z
+
+-->
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="container mx-auto">
+        <h1 class="text-3xl font-bold mb-6">Agencies List</h1>
+        <div class="flex flex-wrap">
+            {% for agency in agencies %}
+                <div class="agency-item">
+                    <a href="{% url 'agency_details' agency_id=agency.id %}">
+                        <div class="agency-image-container">
+                            <img src="{{ agency.image.url }}" alt="{{ agency.name }}" class="agency-image">
+                        </div>
+                    </a>
+                    <p class="agency-name">{{ agency.name }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Buttons -->
+        <div class="flex items-center mt-8">
+            <a href="{% url 'home' %}" class="btn btn-secondary mr-4">Home</a>
+            <form action="{% url 'advanced_car_search' %}" method="get" class="mr-4">
+                <button type="submit" class="btn btn-primary">Advanced Car Search</button>
+            </form>
+            <form action="{% url 'book_vehicle' %}" method="get">
+                <button type="submit" class="btn btn-primary">Book Vehicle</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

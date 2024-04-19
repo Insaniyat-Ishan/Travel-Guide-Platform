@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Locations</title>
+    <style>
+        body {
+            /* Set background image */
+            background-image: url("/static/images/backgrounds/destination.jpg"); /* Adjust the path as per your project structure */
+            /* Set background size to cover entire viewport */
+            background-size: cover;
+            /* Set font family */
+            font-family: Arial, sans-serif;
+            /* Add padding for better spacing */
+            padding: 20px;
+            /* Set color to white for better readability */
+            color: white;
+        }
+        h1 {
+            /* Margin bottom for heading */
+            margin-bottom: 20px;
+            /* Text shadow for better visibility */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        ul {
+            /* Remove bullet points from list */
+            list-style-type: none;
+            /* Remove default padding */
+            padding: 0;
+        }
+        li {
+            /* Add margin between list items */
+            margin-bottom: 10px;
+            /* Set semi-transparent background color for each list item */
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Add padding to each list item */
+            padding: 15px;
+            /* Add border radius for rounded corners */
+            border-radius: 10px;
+            /* Add shadow for depth */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+        .add-favorite-button,
+        .go-home-button {
+            /* Add padding to button (top and bottom 10px, left and right 20px) */
+            padding: 10px 20px;
+            /* Set button background color */
+            background-color: #007bff;
+            /* Set button text color */
+            color: #fff;
+            /* Remove button border */
+            border: none;
+            /* Add border radius for rounded corners */
+            border-radius: 5px;
+            /* Remove default button underline */
+            text-decoration: none;
+            /* Smooth transition on hover */
+            transition: background-color 0.3s;
+            /* Set font size */
+            font-size: 16px;
+            /* Add margin between buttons */
+            margin-right: 10px;
+        }
+        .add-favorite-button:hover,
+        .go-home-button:hover {
+            /* Darken button background color on hover */
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Favorite Locations</h1>
+    <ul>
+        {% for favorite_location in favorite_locations %}
+            <li>{{ favorite_location.destination.name }} - {{ favorite_location.destination.country }}</li>
+        {% empty %}
+            <li>No favorite locations yet.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'home' %}" class="go-home-button">Go to Home</a>
+    <a href="{% url 'add_favorite_location' %}" class="add-favorite-button">Add Favorite Location</a>
+</body>
+</html>

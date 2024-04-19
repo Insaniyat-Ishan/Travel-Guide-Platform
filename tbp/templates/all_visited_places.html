@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'video_background.html' %}
+    <meta charset="UTF-8">
+    <title>Tips and Tricks for Destinations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+            color: rgb(255, 255, 255);
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(0,0,0,0.5);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        li:last-child {
+            margin-bottom: 0;
+        }
+        strong {
+            color: #ffffff;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tips and Tricks</h1>
+        <ul>
+            {% for visited_place in visited_places %}
+                <li>
+                    <strong>{{ visited_place.traveler.username }}</strong> visited <strong>{{ visited_place.location }}</strong>: {{ visited_place.description }}
+                </li>
+            {% empty %}
+                <li>No visited places yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_visited_place' %}" class="button">Add your Experience</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Information</title>
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Your custom CSS or additional styles here -->
+    <style>
+        body {
+            background-image: url('/static/images/backgrounds/bg-01.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black */
+            color: white;
+            margin-top: 100px; /* Adjust as needed */
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8 rounded-lg shadow-lg">
+        <!-- Profile information card -->
+        <div class="p-8">
+            <!-- Profile picture and basic info -->
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- Profile picture -->
+                <div class="w-full md:w-1/3 flex justify-center mb-4 md:mb-0">
+                    <!-- Display the profile picture if available -->
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="rounded-full w-48 h-48">
+                    {% else %}
+                        <!-- If profile picture is not available, use a placeholder image -->
+                        <img src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Placeholder" class="rounded-full w-48 h-48">
+                    {% endif %}
+                </div>
+                <!-- Basic info -->
+                <div class="w-full md:w-2/3">
+                    <h1 class="text-3xl font-semibold mb-2">Username: {{ profile.username }}</h1>
+
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="mt-6">
+                <h2 class="text-2xl font-semibold mb-4">Additional Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block font-bold mb-2">Name:</label>
+                        <p>{{ profile.name }}</p>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Email:</label>
+                        <p>{{ profile.email }}</p>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Phone:</label>
+                        <p>{{ profile.phone }}</p>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Age:</label>
+                        <p>{{ profile.age }}</p>
+                    </div>
+                    <div>
+                        <label class="block font-bold mb-2">Gender:</label>
+                        <p>{{ profile.gender }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="mt-6">
+                <a href="{% url 'update_profile' %}" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded inline-block mr-4">Edit Profile</a>
+                <a href="{% url 'booked_rooms' %}" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded inline-block mr-4">Booked Rooms</a>
+                <a href="{% url 'booked_vehicles' %}" class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-4 py-2 rounded inline-block mr-4">Booked Vehicles</a>
+                <a href="{% url 'booked_flights' %}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-4 py-2 rounded inline-block">Booked Flights</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

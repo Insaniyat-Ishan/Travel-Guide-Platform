@@ -1,0 +1,15 @@
+<!-- destination_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ destination.name }}</title>
+</head>
+<body>
+    <h1>{{ destination.name }}</h1>
+    <p>Country: {{ destination.country }}</p>
+    <p>Description: {{ destination.description }}</p>
+    <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+</body>
+</html>
