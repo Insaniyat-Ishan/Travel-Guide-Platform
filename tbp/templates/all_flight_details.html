@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,6 +31,7 @@
             {% endfor %}
         </ul>
         <a href="{% url 'search_vacant_seats' %}" class="button bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded transition duration-300 mt-6">Advanced Search</a>
+        <a href="{% url 'book_flight' %}" class="button bg-gray-500 hover:bg-gray-600 text-white font-semibold px-4 py-2 rounded transition duration-300 mt-6 ml-4">Book Flight</a>
     </div>
 </body>
 </html>
