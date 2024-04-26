@@ -70,6 +70,8 @@ class ProfilePictureForm(forms.ModelForm):
 
 class BookRoomForm(forms.ModelForm):
     total_amount = forms.DecimalField(max_digits=10, decimal_places=2, label='Total Amount')
+    booking_date = forms.DateField(label='Booking_date', widget=forms.DateInput(attrs={'type': 'date'}))
+    checkout_date = forms.DateField(label='Checkout_date', widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         model = BookRoom
@@ -107,8 +109,10 @@ class BookRoomForm(forms.ModelForm):
         return cleaned_data
     
 class BookVehicleForm(forms.ModelForm):
-    total_amount = forms.DecimalField(label='Total Amount')
 
+    total_amount = forms.DecimalField(label='Total Amount')
+    booking_date = forms.DateField(label='Booking_date', widget=forms.DateInput(attrs={'type': 'date'}))
+    checkout_date = forms.DateField(label='Checkout_date', widget=forms.DateInput(attrs={'type': 'date'}))
     class Meta:
         model = BookVehicle
         fields = ['vehicle', 'booking_date', 'checkout_date', 'total_amount']
